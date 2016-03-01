@@ -29,4 +29,28 @@ public class Report {
         r.footer.total = c.getTotal();
         return r;
     }
+
+    public static Report getSpecificReport(Customer c,
+                                           boolean includeHeader,
+                                           boolean includeBodyHeader,
+                                           boolean includeBodyRentalsr,
+                                           boolean includeFooter) {
+        Report r = new Report();
+        if (includeHeader) {
+            r.header = new Header();
+            r.header.customerName = c.getName();
+        }
+        if (includeBodyHeader) {
+            r.body = new Body();
+            if (includeBodyRentalsr) {
+                r.body.rentals = new ArrayList<>();
+                r.body.rentals.addAll(c.getRentals());
+            }
+        }
+        if (includeFooter) {
+            r.footer = new Footer();
+            r.footer.total = c.getTotal();
+        }
+        return r;
+    }
 }

@@ -8,10 +8,13 @@ public class TextReport implements ReportFormat {
     public String format(Report report) {
         final StringBuilder sb = new StringBuilder();
         if (report.header != null) {
-            sb.append("Customer " + report.header.customerName + "\n");
+            sb.append("Customer " + report.header.customerName);
         }
 
         if (report.body != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append("\n");
+            }
             sb.append("Rentals: " + "\n");
             for (Rental r : report.body.rentals) {
                 sb.append("Rental: " + "\n");
@@ -26,6 +29,9 @@ public class TextReport implements ReportFormat {
         }
 
         if (report.footer != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append("\n");
+            }
             sb.append("Total amount: " + report.footer.total);
         }
         return sb.toString();
