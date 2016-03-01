@@ -72,7 +72,6 @@ public class StatementTest {
 
         // Print the statement
 
-        System.out.println(invoice);
         assertThat(invoice).isEqualTo("{Customer:  Mickey MouseRentals: [ Rental: {Movies: [ Cinderella,],amount: 3.0}, ],Total amount: 3.0}");
         //endregion
     }
@@ -97,23 +96,91 @@ public class StatementTest {
     }
 //
 //
-//    @Test
-//    public void bonuXxxDay2() {
-//        //region Given
-//        Movie movCinderella = new Movie("Cinderella", PriceCodes.XXX);
-//        Customer custMickeyMouse = new Customer("Mickey Mouse");
-//        Rental rental1 = new Rental(movCinderella, 2);
-//        custMickeyMouse.addRental(rental1);
-//        //endregion
-//
-//        //region When
+    @Test
+    public void totalAmountXXXDay1() {
+        //region Given
+        Movie movCinderella = new Movie("Cinderella", PriceCodes.XXX);
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Rental rental1 = new Rental(movCinderella, 1);
+        custMickeyMouse.addRental(rental1);
+        //endregion
+
+        //region When
+        ReportFormat format = new TextReport();
+        String invoice = format.format(Report.getReport(custMickeyMouse));
+        //endregion
+
+        //region Then
+        assertThat(invoice).contains("Total amount: 5");
+        //endregion
+    }
+
+    @Test
+    public void totalAmountXXXDay4() {
+        //region Given
+        Movie movCinderella = new Movie("Cinderella", PriceCodes.XXX);
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Rental rental1 = new Rental(movCinderella, 4);
+        custMickeyMouse.addRental(rental1);
+        //endregion
+
+        //region When
+        ReportFormat format = new TextReport();
+        String invoice = format.format(Report.getReport(custMickeyMouse));
+        //endregion
+
+        //region Then
+        assertThat(invoice).contains("Total amount: 6");
+        //endregion
+    }
+
+    @Test
+    public void totalAmountChildrenDay1() {
+        //region Given
+        Movie movCinderella = new Movie("Cinderella", PriceCodes.CHILDREN);
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Rental rental1 = new Rental(movCinderella, 1);
+        custMickeyMouse.addRental(rental1);
+        //endregion
+
+        //region When
 //        String invoice = custMickeyMouse.getInvoice();
-//        //endregion
-//
-//        //region Then
-//        assertThat(invoice).contains("You earned " + 1 + " frequent renter points.");
-//        //endregion
-//    }
+        ReportFormat format = new TextReport();
+        String invoice = format.format(Report.getReport(custMickeyMouse));
+        //endregion
+
+        //region Then
+
+
+        // Print the statement
+
+        assertThat(invoice).contains("Total amount: 1.5");
+        //endregion
+    }
+
+    @Test
+    public void totalAmountChildrenDay4() {
+        //region Given
+        Movie movCinderella = new Movie("Cinderella", PriceCodes.CHILDREN);
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Rental rental1 = new Rental(movCinderella, 4);
+        custMickeyMouse.addRental(rental1);
+        //endregion
+
+        //region When
+//        String invoice = custMickeyMouse.getInvoice();
+        ReportFormat format = new TextReport();
+        String invoice = format.format(Report.getReport(custMickeyMouse));
+        //endregion
+
+        //region Then
+
+
+        // Print the statement
+
+        assertThat(invoice).contains("Total amount: 3");
+        //endregion
+    }
 //
 //
 //    @Test
