@@ -29,6 +29,54 @@ public class StatementTest {
     }
 
     @Test
+    public void totalAmountRegularDay1() {
+        //region Given
+        Movie movCinderella = new Movie("Cinderella", PriceCodes.REGULAR);
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Rental rental1 = new Rental(movCinderella, 1);
+        custMickeyMouse.addRental(rental1);
+        //endregion
+
+        //region When
+//        String invoice = custMickeyMouse.getInvoice();
+        ReportFormat format = new TextReport();
+        String invoice = format.format(Report.getReport(custMickeyMouse));
+        //endregion
+
+        //region Then
+
+
+        // Print the statement
+
+        assertThat(invoice).contains("Total amount: 2");
+        //endregion
+    }
+
+    @Test
+    public void totalAmountRegularDay3() {
+        //region Given
+        Movie movCinderella = new Movie("Cinderella", PriceCodes.REGULAR);
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Rental rental1 = new Rental(movCinderella, 3);
+        custMickeyMouse.addRental(rental1);
+        //endregion
+
+        //region When
+//        String invoice = custMickeyMouse.getInvoice();
+        ReportFormat format = new TextReport();
+        String invoice = format.format(Report.getReport(custMickeyMouse));
+        //endregion
+
+        //region Then
+
+
+        // Print the statement
+
+        assertThat(invoice).contains("Total amount: 3.5");
+        //endregion
+    }
+
+    @Test
     public void totalAmountNewReleaseDay1() {
         //region Given
         Movie movCinderella = new Movie("Cinderella", PriceCodes.NEWRELEASE);
