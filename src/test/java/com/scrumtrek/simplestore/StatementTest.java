@@ -51,6 +51,31 @@ public class StatementTest {
         assertThat(invoice).contains("Total amount: 3.0");
         //endregion
     }
+
+    @Test
+    public void totalAmountNewReleaseDay1Json() {
+        //region Given
+        Movie movCinderella = new Movie("Cinderella", PriceCodes.NEWRELEASE);
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Rental rental1 = new Rental(movCinderella, 1);
+        custMickeyMouse.addRental(rental1);
+        //endregion
+
+        //region When
+//        String invoice = custMickeyMouse.getInvoice();
+        ReportFormat format = new JsonReport();
+        String invoice = format.format(Report.getReport(custMickeyMouse));
+        //endregion
+
+        //region Then
+
+
+        // Print the statement
+
+        System.out.println(invoice);
+        assertThat(invoice).isEqualTo("{Customer:  Mickey MouseRentals: [ Rental: {Movies: [ Cinderella,],amount: 3.0}, ],Total amount: 3.0}");
+        //endregion
+    }
 //
     @Test
     public void totalAmountNewReleaseDay3() {
