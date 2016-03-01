@@ -250,8 +250,32 @@ public class StatementTest {
 
         // Print the statement
 
-        System.out.println(invoice);
         assertThat(invoice).isEqualTo("Customer Mickey Mouse");
+        //endregion
+    }
+
+    @Test
+    public void totalAmountNewReleaseDay1FooterOnly() {
+        //region Given
+        Movie movCinderella = new Movie("Cinderella", PriceCodes.NEWRELEASE);
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Rental rental1 = new Rental(movCinderella, 1);
+        custMickeyMouse.addRental(rental1);
+        //endregion
+
+        //region When
+//        String invoice = custMickeyMouse.getInvoice();
+        ReportFormat format = new TextReport();
+        String invoice = format.format(Report.getSpecificReport(custMickeyMouse, false, false, false, true));
+        //endregion
+
+        //region Then
+
+
+        // Print the statement
+
+        System.out.println(invoice);
+        assertThat(invoice).isEqualTo("Total amount: 3.0");
         //endregion
     }
 //

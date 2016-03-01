@@ -5,22 +5,9 @@ package com.scrumtrek.simplestore;
  */
 public class PriceCodes {
     public static final PriceCodes REGULAR = new PriceCodes(2, 2, 1.5);
-    public static final PriceCodes NEWRELEASE = new PriceCodes(0, 0, 3) {
-        @Override
-        public int getBonusPoints(int daysRented) {
-            int bonusPoints = super.getBonusPoints(daysRented);
-            return (daysRented > 1) ? bonusPoints + 1 : bonusPoints;
-        }
-    };
+    public static final PriceCodes NEWRELEASE = new PriceCodes(0, 0, 3);
     public static final PriceCodes CHILDREN = new PriceCodes(1.5, 3, 1.5);
-    public static final PriceCodes XXX = new PriceCodes(5, 3, 1) {
-        @Override
-        public int getBonusPoints(int daysRented) {
-            int bonusPoints = super.getBonusPoints(daysRented);
-            return (daysRented > 2) ? bonusPoints + 5 : bonusPoints;
-        }
-    };
-    public static final int DEFAULT_BONUS_POINTS = 1;
+    public static final PriceCodes XXX = new PriceCodes(5, 3, 1);
 
     private final double startAmount;
     private final int startDays;
@@ -36,7 +23,4 @@ public class PriceCodes {
         return startAmount + ((daysRented > startDays) ? (daysRented - startDays) * coefficient : 0);
     }
 
-    public int getBonusPoints(final int daysRented) {
-        return DEFAULT_BONUS_POINTS;
-    }
 }
